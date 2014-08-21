@@ -1,0 +1,76 @@
+.wrapper{
+	margin:0 auto;
+	width:100%;
+
+}
+
+.card {
+	background-color: #2a2b2a;
+	width: 11em;
+	height: 16em;
+	margin: 5%;
+	border: solid 1px black;
+	position: relative;
+	border: solid 8px transparent;
+}
+
+.dot{
+	width:2em;
+	height:2em;
+	border-radius: 50%;
+	content: ' ';
+}
+
+.top-left{
+	/*red*/
+	background-color: #c23d4b;
+	position:absolute;
+	top:2em;
+	left:2em;
+
+}
+.mid-left{
+	/*blue*/
+	background-color: #4287c7;
+	position:absolute;
+	top:44%;
+	left:2em;
+}
+.bottom-left{
+	/*green*/
+	background-color: #1d7d3d;
+	position: absolute;
+	left:2em;
+	bottom:2em;
+}
+.top-right{
+	/*purple*/
+	background-color: #8177b7;
+	position:absolute;
+	top:2em;
+	right:2em;
+}
+.mid-right{
+	/*yellow*/
+	background-color: #f1ca1b;
+	position:absolute;
+	top:44%;
+	right:2em;
+}
+.bottom-right{
+	/*orange*/
+	background-color: #e16326;
+	position: absolute;
+	bottom:2em;
+	right:2em;
+}
+.on{
+	visibility: visible;
+}
+.off{
+	visibility: hidden;
+}
+
+.selected{
+	border: solid 8px grey;
+}
