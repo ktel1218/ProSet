@@ -1,6 +1,7 @@
 
-
 var pool_size = 7;
+var selected = [];
+var score = 0;
 
 var binaryString = function (int) {
 	binary_string = int.toString(2);
@@ -50,6 +51,60 @@ var display = function (pool) {
 		}
     }
 }
+
+$('.card').bind('click', function() { check($(this).attr('id')) });
+
+//function adds the new element to an array (global array? is that gauche?)
+//Or deletes it if it's already there. (Set would be useful but it's not supported well)
+//then xors. If all cards in the array can be xored, remove all cards from the array
+//and increase the counter to 1. If not, do nothing. limit is unnecessary
+//this needs to be networked for multiplayer
+//timed for single player
+
+var check = function (id) {
+	// binary_string = binaryString(pool[id]);
+	var index = $.inArray(pool[id], selected);
+	console.log(index);
+	if (index != -1) {
+		selected.splice(index, 1);
+		$('#'+ id).removeClass('selected');
+	}
+	else {
+		selected.push(pool[id]);
+		$('#'+ id).addClass('selected');
+	}
+	if (selected.length > 1) {
+		if (my_xor(selected) == 0) {
+			for (var i = 0; i < selected.length; i ++) {
+				console.log("pool is undefined?");
+				console.log(pool);
+				var index = $.inArray(selected[i], pool); //have to find them all again, this is dumb
+				deal(shuffled_deck, pool, index);
+				$('.card').removeClass('selected');
+			}
+			display(pool);
+			selected = [];
+			increment_score();
+		}
+	}
+
+	console.log(selected);
+}
+
+var my_xor = function (list) {
+	var result = list[0];
+	for (var i = 1; i < list.length; i ++) {
+		result = result ^ list[i];
+	}
+	return result;
+}
+
+var increment_score = function () {
+	score ++;
+	$('#score').text(score);
+}
+
+
 
 // just represent whats in the code in the CSS
 // Cards and dots already exist, just turn them on or off
