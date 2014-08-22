@@ -24,7 +24,7 @@ var shuffle = function (unshuffled_deck) {
 	//Fisher-Yates
 	shuffled_deck = [];
 	while (unshuffled_deck.length>0){
-		randInt = Math.floor(Math.random() * (unshuffled_deck.length-1));
+		randInt = Math.floor(Math.random() * (unshuffled_deck.length));
 		shuffled_deck.push(unshuffled_deck.splice(randInt,1)[0]);
 	}
 	return shuffled_deck;
@@ -36,9 +36,20 @@ var deal = function (shuffled_deck, pool, index) {
 }
 
 var display = function (pool) {
-	// $('#1').
+    var wrapper = document.getElementById("wrapper");
+    for (var i = 0; i < pool.length; i++) {
+    	for (var j = 0; j < 6; j ++) {
+    		var card_id_and_dot = '.card' + '#' + i + ' .dot' + ':eq(' + j + ')' ;
+    		var binary_string = binaryString(pool[i]);
+    		if (binary_string[j] == 0) {
+	    		$(card_id_and_dot).removeClass('on').addClass('off');
+    		}
+    		else {
+    			$(card_id_and_dot).removeClass('off').addClass('on');
+    		}
+		}
+    }
 }
-
 
 // just represent whats in the code in the CSS
 // Cards and dots already exist, just turn them on or off
@@ -59,17 +70,12 @@ var display = function (pool) {
 
 
 var deck = create_deck();
-console.log(deck);
 
 var shuffled_deck = shuffle(deck);
 
 var pool = [];
-pool = deal(shuffled_deck, pool, pool_size);
-console.log(pool);
+for (var i = 0; i < pool_size; i ++) {
+	pool = deal(shuffled_deck, pool, i);
+}
 
-console.log(shuffled_deck);
-
-console.log(binaryString(pool[0]));
-console.log(binaryString(pool[1]));
-console.log(binaryString(pool[2]));
-console.log(binaryString(pool[0]^pool[1]^pool[2]));
+display(pool);
