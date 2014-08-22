@@ -1,4 +1,8 @@
-#wrapper{
+body{
+	font-size: .75em;
+}
+
+#wrapper {
 	margin:0 auto;
 	max-width:80em;
 	text-align: center;
@@ -6,23 +10,24 @@
 
 .card {
 	background-color: #2a2b2a;
-	width: 11em;
+	width: 12em;
 	height: 16em;
 	margin: 3%;
-	border: solid 1px black;
 	position: relative;
 	display:inline-block;
-	border: solid 8px transparent;
+	/*border: solid 12px transparent;*/
+	-webkit-transition:background-color s, -webkit-transform s;
+    transition:background-color s, transform s;
 }
 
-.dot{
+.dot {
 	width:2em;
 	height:2em;
 	border-radius: 50%;
 	content: ' ';
 }
 
-.top-left{
+.top-left {
 	/*red*/
 	background-color: #c23d4b;
 	position:absolute;
@@ -30,14 +35,14 @@
 	left:2em;
 
 }
-.mid-left{
+.mid-left {
 	/*blue*/
 	background-color: #4287c7;
 	position:absolute;
 	top:44%;
 	left:2em;
 }
-.bottom-left{
+.bottom-left {
 	/*green*/
 	background-color: #1d7d3d;
 	position: absolute;
@@ -72,6 +77,14 @@
 	visibility: hidden;
 }
 
-.selected{
-	border: solid 8px grey;
+.selected {
+	/*border: solid 12px grey;*/
+	/*background-color: black;*/
+	background: repeating-linear-gradient(
+	  135deg,
+	  #2a2b2a,
+	  #2a2b2a 10px,
+	  #000 10px,
+	  #000 20px
+	);
 }

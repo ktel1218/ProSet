@@ -62,6 +62,7 @@ $('.card').bind('click', function() { check($(this).attr('id')) });
 //timed for single player
 
 var check = function (id) {
+	// $('#'+id).fadeOut(100).fadeIn(100);
 	// binary_string = binaryString(pool[id]);
 	var index = $.inArray(pool[id], selected);
 	console.log(index);
@@ -75,13 +76,14 @@ var check = function (id) {
 	}
 	if (selected.length > 1) {
 		if (my_xor(selected) == 0) {
+		// if (true) {
 			for (var i = 0; i < selected.length; i ++) {
-				console.log("pool is undefined?");
-				console.log(pool);
 				var index = $.inArray(selected[i], pool); //have to find them all again, this is dumb
+				$('#'+ index).addClass('flash');
 				deal(shuffled_deck, pool, index);
-				$('.card').removeClass('selected');
 			}
+			$('.flash').fadeOut(200).fadeIn(200);
+			$('.card').removeClass('selected').removeClass('flash');
 			display(pool);
 			selected = [];
 			increment_score();
@@ -98,6 +100,7 @@ var my_xor = function (list) {
 	}
 	return result;
 }
+
 
 var increment_score = function () {
 	score ++;
