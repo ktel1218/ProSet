@@ -4,6 +4,7 @@ var selected = [];
 var score = 0;
 
 var binaryString = function (int) {
+	// prints and pads, used to display dots
 	binary_string = int.toString(2);
 	while (binary_string.length < 6){
 		binary_string = '0' + binary_string;
@@ -12,6 +13,7 @@ var binaryString = function (int) {
 }
 
 var create_deck = function () {
+	//just an array from 1 to 64
 	unshuffled_deck = []
 	var i = 1; // Stewart Stewart says: The trivial card is too trivial (exclude the blank card, 64 (2^6) permutations but 63 cards)
 	while (i < 64){
@@ -22,7 +24,7 @@ var create_deck = function () {
 }
 
 var shuffle = function (unshuffled_deck) {
-	//Fisher-Yates
+	//Fisher-Yates deck shuffle
 	shuffled_deck = [];
 	while (unshuffled_deck.length>0){
 		randInt = Math.floor(Math.random() * (unshuffled_deck.length));
@@ -32,11 +34,13 @@ var shuffle = function (unshuffled_deck) {
 }
 
 var deal = function (shuffled_deck, pool, index) {
+	// adds card from deck into corect index
 	pool[index]=(shuffled_deck.pop())
 	return pool;
 }
 
 var display = function (pool) {
+	// turns css on and off
     var wrapper = document.getElementById("wrapper");
     for (var i = 0; i < pool.length; i++) {
     	for (var j = 0; j < 6; j ++) {
@@ -52,20 +56,10 @@ var display = function (pool) {
     }
 }
 
-$('.card').bind('click', function() { check($(this).attr('id')) });
-
-//function adds the new element to an array (global array? is that gauche?)
-//Or deletes it if it's already there. (Set would be useful but it's not supported well)
-//then xors. If all cards in the array can be xored, remove all cards from the array
-//and increase the counter to 1. If not, do nothing. limit is unnecessary
-//this needs to be networked for multiplayer
-//timed for single player
 
 var check = function (id) {
-	// $('#'+id).fadeOut(100).fadeIn(100);
-	// binary_string = binaryString(pool[id]);
+	// poorly named function
 	var index = $.inArray(pool[id], selected);
-	console.log(index);
 	if (index != -1) {
 		selected.splice(index, 1);
 		$('#'+ id).removeClass('selected');
@@ -74,26 +68,21 @@ var check = function (id) {
 		selected.push(pool[id]);
 		$('#'+ id).addClass('selected');
 	}
-	if (selected.length > 1) {
-		if (my_xor(selected) == 0) {
-		// if (true) {
-			for (var i = 0; i < selected.length; i ++) {
-				var index = $.inArray(selected[i], pool); //have to find them all again, this is dumb
-				$('#'+ index).addClass('flash');
-				deal(shuffled_deck, pool, index);
-			}
-			$('.flash').fadeOut(200).fadeIn(200);
-			$('.card').removeClass('selected').removeClass('flash');
-			display(pool);
-			selected = [];
-			increment_score();
+	if (my_xor(selected) == 0) {
+	// if (true) {
+		for (var i = 0; i < selected.length; i ++) {
+			var index = $.inArray(selected[i], pool); //have to find them all again, this is dumb
+			$('#'+ index).fadeOut(150).fadeIn(150).removeClass('selected');
+			deal(shuffled_deck, pool, index);
 		}
+		setTimeout(function() { display(pool); }, 150); //wait until fadeout/in is finished
+		selected = [];
+		increment_score();
 	}
-
-	console.log(selected);
 }
 
 var my_xor = function (list) {
+	// regular xor for each card in the list
 	var result = list[0];
 	for (var i = 1; i < list.length; i ++) {
 		result = result ^ list[i];
@@ -107,26 +96,6 @@ var increment_score = function () {
 	$('#score').text(score);
 }
 
-
-
-// just represent whats in the code in the CSS
-// Cards and dots already exist, just turn them on or off
-// select cards
-// add selected cards to an array
-// xor them
-// change the display to signal if its wrong OR
-// remember their IDs and redisplay based on new cards
-// 		SO 'pool' as an array is probably not the right data structure
-// 		either I splice and insert (pretty easy)
-// 		or I use a dict... this sounds kinda dumb.
-// 		
-// [[[0,1,0,1,0,1]],[1,0,1,0,1,0],[0,0,0,0,1,1],[card],[card],[card],[card]]
-// 
-// id = 0, 1, 2, 3, 4, 5 or 6
-// select 1, 3 and 4
-// 
-
-
 var deck = create_deck();
 
 var shuffled_deck = shuffle(deck);
@@ -137,3 +106,6 @@ for (var i = 0; i < pool_size; i ++) {
 }
 
 display(pool);
+
+$('.card').bind('click', function() { check($(this).attr('id')) });
+

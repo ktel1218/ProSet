@@ -1,10 +1,17 @@
-body{
+body {
 	font-size: .75em;
+	font-family: 'Montserrat', sans-serif;
+	padding: 1em;
+}
+
+h1 {
+	font-size: 4em;
+	font-weight: 700;
 }
 
 #wrapper {
 	margin:0 auto;
-	max-width:80em;
+	max-width:75em;
 	text-align: center;
 }
 
@@ -76,7 +83,27 @@ body{
 .off{
 	visibility: hidden;
 }
+.scorecard {
+	font-size: 1.5em;
+	background-color: #2a2b2a;
+	color:#fff;
+	width: 10%;
+	padding:1em 1.5em;
+	position: fixed;
+	border-radius: 20px;
+	right: -20px;
+	top: 100px;
+}
 
+.text-block {
+	margin:7%;
+	display: inline-block;
+	text-align: left;
+	background-color: #ddd;
+	/*width: 100%;*/
+	padding:3em 10%;
+	/*max-width: 80%;*/
+}
 .selected {
 	/*border: solid 12px grey;*/
 	/*background-color: black;*/
@@ -87,4 +114,5 @@ body{
 	  #000 10px,
 	  #000 20px
 	);
+	background-color: black;
 }
