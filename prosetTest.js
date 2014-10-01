@@ -1,4 +1,3 @@
-
 var pool_size = 7;
 var selected = [];
 var score = 0;
@@ -16,7 +15,7 @@ var create_deck = function () {
 	//just an array from 1 to 64
 	unshuffled_deck = []
 	var i = 1; // Stewart Stewart says: The trivial card is too trivial (exclude the blank card, 64 (2^6) permutations but 63 cards)
-	while (i < 64){
+	while (i < 8){
 		unshuffled_deck.push(i);
 		i ++;
 	}
@@ -24,7 +23,6 @@ var create_deck = function () {
 }
 
 var shuffle = function (unshuffled_deck) {
-	//Fisher-Yates deck shuffle
 	shuffled_deck = [];
 	while (unshuffled_deck.length>0){
 		randInt = Math.floor(Math.random() * (unshuffled_deck.length));
@@ -34,24 +32,45 @@ var shuffle = function (unshuffled_deck) {
 }
 
 var deal = function (shuffled_deck, pool, index) {
-	// adds card from deck into corect index
-	pool[index]=(shuffled_deck.pop())
-	return pool;
+	pool[index] = null;
+	if (shuffled_deck){
+		// adds card from deck into corect index
+		pool[index]=(shuffled_deck.pop())
+		return pool;
+	}
+}
+
+var game_over = function (pool){
+	for (var i = 0; i < pool.length; i++){
+		console.log(i);
+		if (pool[i]){
+			console.log("card exists: ", pool[i]);
+			return false;
+		}
+	}
+	return true;
 }
 
 var display = function (pool) {
 	// turns css on and off
     var wrapper = document.getElementById("wrapper");
     for (var i = 0; i < pool.length; i++) {
-    	for (var j = 0; j < 6; j ++) {
-    		var card_id_and_dot = '.card' + '#' + i + ' .dot' + ':eq(' + j + ')' ;
-    		var binary_string = binaryString(pool[i]);
-    		if (binary_string[j] == 0) {
-	    		$(card_id_and_dot).removeClass('on').addClass('off');
-    		}
-    		else {
-    			$(card_id_and_dot).removeClass('off').addClass('on');
-    		}
+    	// if card has been dealt
+    	if (pool[i]){
+			var binary_string = binaryString(pool[i]);
+	    	for (var j = 0; j < 6; j ++) {
+	    		var card_id_and_dot = 'div.card' + '#' + i + ' .dot' + ':eq(' + j + ')' ;
+	    		if (binary_string[j] == 0) {
+		    		$(card_id_and_dot).removeClass('on').addClass('off');
+	    		}
+	    		else {
+	    			$(card_id_and_dot).removeClass('off').addClass('on');
+	    		}
+			}
+		}else{
+			// turn card off
+			$('div.card#'+i).addClass('off');
+			$('div.card#'+i+"> .dot").addClass('off');
 		}
     }
 }
@@ -59,9 +78,9 @@ var display = function (pool) {
 
 var check = function (id) {
 	// poorly named function
-	var index = $.inArray(pool[id], selected);
+	var index = $.inArray(pool[id], selected); //returns -1 if not in array
 	if (index != -1) {
-		selected.splice(index, 1);
+ 		selected.splice(index, 1); 
 		$('#'+ id).removeClass('selected');
 	}
 	else {
@@ -69,7 +88,6 @@ var check = function (id) {
 		$('#'+ id).addClass('selected');
 	}
 	if (my_xor(selected) == 0) {
-	// if (true) {
 		for (var i = 0; i < selected.length; i ++) {
 			var index = $.inArray(selected[i], pool); //have to find them all again, this is dumb
 			$('#'+ index).fadeOut(150).fadeIn(150).removeClass('selected');
@@ -78,6 +96,10 @@ var check = function (id) {
 		setTimeout(function() { display(pool); }, 150); //wait until fadeout/in is finished
 		selected = [];
 		increment_score();
+		
+	}
+	if (game_over(pool)){
+		document.body.innerHTML = "<h1>GAME OVER!</h1><p>You found " + score + " sets.</p>" 
 	}
 }
 
@@ -99,7 +121,7 @@ var increment_score = function () {
 var deck = create_deck();
 
 var shuffled_deck = shuffle(deck);
-
+//initialize pool of cards
 var pool = [];
 for (var i = 0; i < pool_size; i ++) {
 	pool = deal(shuffled_deck, pool, i);
@@ -107,5 +129,5 @@ for (var i = 0; i < pool_size; i ++) {
 
 display(pool);
 
-$('.card').bind('click', function() { check($(this).attr('id')) });
+$('div.card').bind('click', function() { check($(this).attr('id')) });
 

@@ -1,28 +1,43 @@
+* {
+	margin:0;
+	padding:0;
+}
+
 body {
 	font-size: .75em;
 	font-family: 'Montserrat', sans-serif;
-	padding: 1em;
+	text-align: center;
+	margin: 4em;
 }
 
 h1 {
 	font-size: 4em;
 	font-weight: 700;
+	margin-bottom: 1em;
+}
+
+.deck {
+	width:25%;
+	margin-left: -25%;
+	vertical-align: top;
+	display: inline-block;
 }
 
 #wrapper {
-	margin:0 auto;
-	max-width:75em;
+	width: 60%;
+	display: inline-block;
+	vertical-align: top;
 	text-align: center;
 }
 
 .card {
 	background-color: #2a2b2a;
 	width: 12em;
+	max-width: 20em;
 	height: 16em;
-	margin: 3%;
+	margin: 0 3% 2em 0;
 	position: relative;
 	display:inline-block;
-	/*border: solid 12px transparent;*/
 	-webkit-transition:background-color s, -webkit-transform s;
     transition:background-color s, transform s;
 }
