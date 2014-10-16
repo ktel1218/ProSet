@@ -13,18 +13,21 @@ body {
 h1 {
 	font-size: 4em;
 	font-weight: 700;
-	margin-bottom: 1em;
+	padding-bottom: 0.5em;
 }
 
-.deck {
-	width:25%;
-	margin-left: -25%;
-	vertical-align: top;
+#deck {
+	width:10%;
+	min-width: 6em;
+	margin-left: -10em;
+	margin-right: 5em;
 	display: inline-block;
+	/*vertical-align: top;*/
 }
 
 #wrapper {
-	width: 60%;
+	width: 80%;
+	min-width: 40em;
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
@@ -40,6 +43,20 @@ h1 {
 	display:inline-block;
 	-webkit-transition:background-color s, -webkit-transform s;
     transition:background-color s, transform s;
+}
+
+
+.card_back{
+	background-image: url("dark_geometric_@2X.png");
+	margin-top: -11.6em;
+	margin-left:1px;
+	width: 10em;
+	height: 12em;
+    /*border: 1px solid #CCC;*/
+}
+
+.card_back:first-child{
+	margin-top: 0;
 }
 
 .dot {
@@ -98,16 +115,25 @@ h1 {
 .off{
 	visibility: hidden;
 }
+.table{
+	width:75%;
+	display: inline-block;
+	vertical-align: top;
+}
+
 .scorecard {
-	font-size: 1.5em;
-	background-color: #2a2b2a;
-	color:#fff;
-	width: 10%;
-	padding:1em 1.5em;
-	position: fixed;
-	border-radius: 20px;
-	right: -20px;
-	top: 100px;
+	font-size: 2em;
+	font-weight: 700;
+	padding-bottom:0.5em;
+	/*background-color: #2a2b2a;*/
+	/*color:#fff;*/
+	color: black;
+	width: 100%;
+	/*padding:1em 1.5em;*/
+	/*position: fixed;*/
+	/*border-radius: 20px;*/
+	/*right: -20px;*/
+	/*top: 100px;*/
 }
 
 .text-block {
@@ -115,12 +141,12 @@ h1 {
 	display: inline-block;
 	text-align: left;
 	background-color: #ddd;
-	/*width: 100%;*/
+	width: 100%;
 	padding:3em 10%;
-	/*max-width: 80%;*/
+	max-width: 50%;
 }
 .selected {
-	/*border: solid 12px grey;*/
+	/*border: solid 12px grey;
 	/*background-color: black;*/
 	background: repeating-linear-gradient(
 	  135deg,

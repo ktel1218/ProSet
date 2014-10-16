@@ -15,7 +15,7 @@ var create_deck = function () {
 	//just an array from 1 to 64
 	unshuffled_deck = []
 	var i = 1; // Stewart Stewart says: The trivial card is too trivial (exclude the blank card, 64 (2^6) permutations but 63 cards)
-	while (i < 8){
+	while (i < 64){
 		unshuffled_deck.push(i);
 		i ++;
 	}
@@ -34,9 +34,13 @@ var shuffle = function (unshuffled_deck) {
 var deal = function (shuffled_deck, pool, index) {
 	pool[index] = null;
 	if (shuffled_deck){
+		// removes card from deck display
+		$('div#deck > div:first').remove();
+
 		// adds card from deck into corect index
 		pool[index]=(shuffled_deck.pop())
 		return pool;
+
 	}
 }
 
@@ -51,7 +55,7 @@ var game_over = function (pool){
 	return true;
 }
 
-var display = function (pool) {
+var display = function (pool, deck) {
 	// turns css on and off
     var wrapper = document.getElementById("wrapper");
     for (var i = 0; i < pool.length; i++) {
@@ -78,6 +82,8 @@ var display = function (pool) {
 
 var check = function (id) {
 	// poorly named function
+	
+	// if card is selected, deselect it. Else, select it.
 	var index = $.inArray(pool[id], selected); //returns -1 if not in array
 	if (index != -1) {
  		selected.splice(index, 1); 
@@ -86,14 +92,20 @@ var check = function (id) {
 	else {
 		selected.push(pool[id]);
 		$('#'+ id).addClass('selected');
+		console.log(pool[id])
 	}
-	if (my_xor(selected) == 0) {
+
+	// once we've selected at least three cards and if they're a set
+	if (selected.length > 2 && my_xor(selected) == 0) {
 		for (var i = 0; i < selected.length; i ++) {
+			// find all the selected cards indices in the pool
 			var index = $.inArray(selected[i], pool); //have to find them all again, this is dumb
+			// flash them to indicate a set
 			$('#'+ index).fadeOut(150).fadeIn(150).removeClass('selected');
+			// deal new cards
 			deal(shuffled_deck, pool, index);
 		}
-		setTimeout(function() { display(pool); }, 150); //wait until fadeout/in is finished
+		setTimeout(function() { display(pool, deck); }, 150); //wait until fadeout/in is finished to display newly dealt cards
 		selected = [];
 		increment_score();
 		
@@ -119,6 +131,12 @@ var increment_score = function () {
 }
 
 var deck = create_deck();
+for (var i = 0; i < 3; i ++){
+	$('div#deck').append("<div class='card_back'></div>")
+}
+
+
+
 
 var shuffled_deck = shuffle(deck);
 //initialize pool of cards
@@ -127,7 +145,10 @@ for (var i = 0; i < pool_size; i ++) {
 	pool = deal(shuffled_deck, pool, i);
 }
 
-display(pool);
+display(pool, deck);
 
-$('div.card').bind('click', function() { check($(this).attr('id')) });
+$('div.card').bind('click', function() { 
+	// console.log($(this).attr('id'))
+	check($(this).attr('id')) 
+});
 
