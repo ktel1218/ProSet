@@ -1,106 +1,28 @@
+<!doctype html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="./style.css">
-	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-	<title>Pro Set</title>
+  <link rel="stylesheet" href="proset.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <title>Pro Set</title>
 </head>
 <body>
-	<div id="wrapper">
-		<h1>PRO SET</h1>
-		<div class="scorecard">Your Score: <span id="score">0</span></div>
-		
-		<div id="deck">
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div><div class="card_back"></div><div class="card_back"></div>
-			<div class="card_back"></div>
-			
-
-		</div>
-		<div class="table">
-			<div id="0" class="card">
-				<div class="top-left dot"></div>
-				<div class="mid-left dot"></div>
-				<div class="bottom-left dot"></div>
-				<div class="top-right dot"></div>
-				<div class="mid-right dot"></div>
-				<div class="bottom-right dot"></div>
-			</div>
-			<div id="1" class="card">
-				<div class="top-left dot"></div>
-				<div class="mid-left dot"></div>
-				<div class="bottom-left dot"></div>
-				<div class="top-right dot"></div>
-				<div class="mid-right dot"></div>
-				<div class="bottom-right dot"></div>
-			</div>
-			<div id="2" class="card">
-				<div class="top-left dot"></div>
-				<div class="mid-left dot"></div>
-				<div class="bottom-left dot"></div>
-				<div class="top-right dot"></div>
-				<div class="mid-right dot"></div>
-				<div class="bottom-right dot"></div>
-			</div>
-			<div id="3" class="card">
-				<div class="top-left dot"></div>
-				<div class="mid-left dot"></div>
-				<div class="bottom-left dot"></div>
-				<div class="top-right dot"></div>
-				<div class="mid-right dot"></div>
-				<div class="bottom-right dot"></div>
-			</div>
-			<div id="4" class="card">
-				<div class="top-left dot"></div>
-				<div class="mid-left dot"></div>
-				<div class="bottom-left dot"></div>
-				<div class="top-right dot"></div>
-				<div class="mid-right dot"></div>
-				<div class="bottom-right dot"></div>
-			</div>
-			<div id="5" class="card">
-				<div class="top-left dot"></div>
-				<div class="mid-left dot"></div>
-				<div class="bottom-left dot"></div>
-				<div class="top-right dot"></div>
-				<div class="mid-right dot"></div>
-				<div class="bottom-right dot"></div>
-			</div>
-			<div id="6" class="card">
-				<div class="top-left dot"></div>
-				<div class="mid-left dot"></div>
-				<div class="bottom-left dot"></div>
-				<div class="top-right dot"></div>
-				<div class="mid-right dot"></div>
-				<div class="bottom-right dot"></div>
-			</div>
-			<div class="text-block">
-				<p>You like Set? Well THIS SET IS FOR PROS. It's Pro Set. Dots cancel each other out between cards. Find sets of cards where every dot is cancelled out. Seven cards makes it <em>actually impossible</em> for there to not be a set, so quit your belly-aching and look harder.</p>
-			</div>
-		</div>
-		
-	</div>
-<script type="text/javascript" src="./prosetTest.js"></script>
+<div id="wrapper">
+  <h1>PRO SET</h1>
+  <div class="scorecard">
+    Your Score: <span id="score">0</span>
+    Round: <span id="round">0</span>
+  </div>
+  <div id="board"></div>
+  <p class="instructions">
+    You like Set? Well, THIS SET IS FOR PROS. It's Pro Set. Dots cancel each other out between
+    cards. Find sets of cards where every is cancelled out. Seven cards makes it
+    <em>actually impossible</em> for there to not be a set, so quit your belly-aching and
+    look harder. Or <button id="hint">get a hint</button> or
+    <button id="cheat" type="button">cheat</button>.
+  </p>
+</div>
+<script src="proset.js"></script>
 </body>
 </html>

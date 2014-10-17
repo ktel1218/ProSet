@@ -1,0 +1,64 @@
+body {
+	font-size: 0.75em;
+	font-family: 'Montserrat', sans-serif;
+	padding: 1em;
+}
+
+h1 {
+	font-size: 4em;
+}
+
+#wrapper {
+	margin: 0 auto;
+	max-width: 75em;
+	text-align: center;
+}
+
+.card {
+	background-color: #2a2b2a;
+	width: 12em;
+	height: 16em;
+	margin: 3%;
+	position: relative;
+	display:inline-block;
+    transition: background-color s, transform s;
+}
+
+.card > div {              /* dots */
+	width: 2em;
+	height: 2em;
+	border-radius: 50%;
+	content: ' ';
+    position: absolute;
+}
+
+.top    { top: 2em; }              .left   { left: 2em; }  .right  { right: 2em; }
+.mid    { top: 44%; }
+.bottom { bottom: 2em; }
+
+.top.left     { background-color: #c23d4b; }   .top.right    { background-color: #8177b7; }
+.mid.left     { background-color: #4287c7; }   .mid.right    { background-color: #f1ca1b; }
+.bottom.left  { background-color: #1d7d3d; }   .bottom.right { background-color: #e16326; }
+
+.scorecard {
+	font-size: 1.5em;
+	background-color: #2a2b2a;
+	color: white;
+	width: 10%;
+	padding: 1em 1.5em;
+	position: fixed;
+	border-radius: 20px;
+	right: -20px;
+	top: 100px;
+}
+
+.instructions {
+	margin: 7%;
+	text-align: left;
+	background-color: #ddd;
+	padding: 3em 10%;
+}
+
+.selected {
+	background: repeating-linear-gradient(135deg, #444, #444 10px, black 10px, black 20px);
+}
