@@ -3,6 +3,7 @@
 	padding:0;
 }
 
+
 body {
 	font-size: .75em;
 	font-family: 'Montserrat', sans-serif;
@@ -15,6 +16,11 @@ h1 {
 	font-weight: 700;
 	padding-bottom: 0.5em;
 }
+h2 {
+	font-size: 3em;
+	font-weight: 700;
+	padding-bottom: 0.5em;
+}
 
 #deck {
 	width:10%;
@@ -22,19 +28,24 @@ h1 {
 	margin-left: -10em;
 	margin-right: 5em;
 	display: inline-block;
-	/*vertical-align: top;*/
 }
 
 #wrapper {
 	width: 80%;
-	min-width: 40em;
+	max-width: 90em;
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
+	position: relative;
+}
+
+#game-over{
+	/*color:;*/
 }
 
 .card {
 	background-color: #2a2b2a;
+	font-size: 1em;
 	width: 12em;
 	max-width: 20em;
 	height: 16em;
@@ -47,12 +58,14 @@ h1 {
 
 
 .card_back{
-	background-image: url("dark_geometric_@2X.png");
-	margin-top: -11.6em;
+	/*background-image: url("dark_geometric_@2X.png");*/
+	font-size: 1em;
+	background-color: #222;
+	margin-top: -11.8em;
 	margin-left:1px;
 	width: 10em;
 	height: 12em;
-    /*border: 1px solid #CCC;*/
+    border: 1px solid #CCC;
 }
 
 .card_back:first-child{
@@ -122,28 +135,29 @@ h1 {
 }
 
 .scorecard {
-	font-size: 2em;
+	background-image: url('starburst.gif');
+	font-size: 3em;
+	z-index:20;
+	background-repeat: no-repeat;
+	background-size: 150px;
+	height:150px;
+	width:150px;
 	font-weight: 700;
-	padding-bottom:0.5em;
-	/*background-color: #2a2b2a;*/
-	/*color:#fff;*/
-	color: black;
-	width: 100%;
-	/*padding:1em 1.5em;*/
-	/*position: fixed;*/
-	/*border-radius: 20px;*/
-	/*right: -20px;*/
-	/*top: 100px;*/
+	text-align: center;
+	padding-top: 55px;
+	position: absolute;
+	top:0;
+	right:-1em;
 }
 
 .text-block {
-	margin:7%;
+	margin:3em 5em 0 3em;
 	display: inline-block;
 	text-align: left;
-	background-color: #ddd;
-	width: 100%;
-	padding:3em 10%;
-	max-width: 50%;
+	background-color: #ccc;
+	/*width: 100%;*/
+	padding:4em;
+	max-width: 40em;
 }
 .selected {
 	/*border: solid 12px grey;
@@ -156,4 +170,51 @@ h1 {
 	  #000 20px
 	);
 	background-color: black;
+}
+
+.flat-button{
+	font-size: 0.5em;
+	display: inline-block;
+	width: 1.25em;
+	height: 1.25em;
+	border-radius: 100%;
+	background-color:#ccc;
+	position: relative;
+	top: -0.25em;
+	left:25px;
+}
+
+@media (max-width: 700px) {
+	h1{
+		padding-bottom: 0.25em;
+	}
+    #deck{
+    	display:none;
+    }
+    .scorecard{
+    	top:0;
+    	right:0;
+    	margin: 0 auto;
+    	padding: 0;
+    	background-image: none;
+    	background-size: 80px;
+    	height:60px;
+    	width: 200px;
+    	display: block;
+    	position:relative;
+    }
+    .scorecard:before{
+    	content: "Score: ";
+    	/*margin-left: 2em;*/
+    }
+    .table{
+    	width:90%;
+    }
+    .card{
+    	font-size:0.75em;
+    }
+    #wrapper{
+    	min-width: 300px;
+		width:100%;
+    }
 }
